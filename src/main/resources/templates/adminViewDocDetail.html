@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/CSS/doctorDetail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+<section class="doc-detail">
+    <div class="doc-card">
+        <div class="doc-img">
+            <img th:src="@{/adminsys/doctorImage/{docId}(docId=${doc.docId})}" alt="Doctor Image">
+        </div>
+        <div class="detail-info">
+            <h2>Doctor Detail</h2>
+            <div class="info">Name: <span th:text="'Dr. '+${doc.docFName}+' '+${doc.docLName}"></span></div>
+            <div class="info">Age: <span th:text="${doc.docAge}"></span></div>
+            <div class="info">Specialty: <span th:text="${doc.specialty}"></span></div>
+            <div class="info">Qualification: <span th:text="${doc.qualification}"></span></div>
+            <div class="info">Experience: <span th:text="${doc.experience}"></span></div>
+            <div class="info">Phone: <span th:text="${doc.docPhone}"></span></div>
+            <div class="info">Address: <span th:text="${doc.docAddress}"></span></div>
+            <div class="info">Email: <span th:text="${doc.docEmail}"></span></div>
+            <div class="info">Fee: <span th:text="${doc.aptFee}"></span></div>
+        </div>
+        <div class="time">
+            <div class="time-slot">
+                <h2>Time Slots</h2>
+                <div class="time-card" th:if="${not #lists.isEmpty(timeSlots)}" th:each="slot:${timeSlots}">
+                    <h3>Date: <span th:text="${slot.date}"></span></h3>
+                    <p><strong>Time: <span th:text="${slot.startTime}"></span> - <span th:text="${slot.endTime}"></span></strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="close">
+            <a th:href="@{/adminsys/viewDoc}"><i class="fa-solid fa-xmark"></i></a>
+        </div>
+    </div>
+</section>
+</body>
+</html>

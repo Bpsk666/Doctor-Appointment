@@ -1,0 +1,318 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background:linear-gradient(90deg, #e2e2e2, #c9d6ff);
+}
+.login-cont{
+    position:relative;
+    width: 850px;
+    height: 550px;
+    background:#fff;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0,0,0,.2);
+    margin: 20px;
+    overflow: hidden;
+}
+.login-cont.active .toggle-box::before{
+    left: 50%;
+}
+.login-cont.active .toggle-panel.toggle-left{
+    left: -50%;
+    transition-delay: 0.6s;
+}
+.login-cont.login-cont.active .toggle-panel.toggle-right{
+    right: 0;
+    transition-delay: 1.2s;
+}
+.form-box{
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-align: center;
+    padding: 40px;
+    z-index: 1;
+    transition: .6s ease-in-out 1.2s, visibility 0s 1s;
+}
+.login-cont.active .form-box{
+    right: 50%;
+}
+.form-box.register{
+    visibility: hidden;
+}
+.login-cont.active .form-box.register{
+    visibility: visible;
+}
+form{
+    width: 100%;
+}
+.login-cont h1{
+    font-size: 36px;
+    margin: -10px 0;
+    margin-bottom: 15px;
+}
+.login-input{
+    position: relative;
+    margin: 30px 0;
+}
+.login-input input{
+    width: 100%;
+    padding: 13px 50px 13px 20px;
+    background: #eee;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
+.login-input input::placeholder{
+    color: #888;
+    font-weight: 400;
+}
+.login-input i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #888;
+}
+.forget-link{
+    margin:-15px 0 15px;
+}
+.forget-link a{
+    font-size: 14.5px;
+    color: #333;
+    text-decoration: none;
+}
+.btnLogin{
+    width: 100%;
+    height: 48px;
+    background: #032F30;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
+.btnLogin:hover{
+    background-color: #12443e;
+}
+.login-cont p{
+    font-size: 14.5px;
+    margin: 15px 0;
+}
+.social-icons{
+    display: flex;
+    justify-content: center;
+}
+.social-icons a{
+    display: inline-flex;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+    margin: 0 8px;
+}
+.login-cont .form-sign-up{
+    margin-top: 30px;
+}
+.form-sign-up .input-box{
+    width: 100%;
+    margin-top: 20px;
+}
+.input-box label{
+    color: #333;
+}
+.form-sign-up .input-box input{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+.form-sign-up .sign-up-input{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    position: relative;
+}
+.sign-up-input input{
+    position: relative;
+    height: 34px;
+    width: 100%;
+    padding: 12px 40px 12px 25px;
+    background: #eee;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
+.sign-up-input select{
+    position: relative;
+    height: 41px;
+    width: 100%;
+    padding: 12px 25px;
+    background: #eee;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    appearance: None;
+}
+.sign-up-input label{
+    margin-right: 8px;
+    font-size: 14px;
+}
+.sign-up-input select:focus{
+    background: #eee;
+}
+.sign-up-input option[disabled]{
+    color: #888;
+    font-weight: 400;
+}
+.form-sign-up .sign-up-input input::placeholder{
+    color: #888;
+    font-weight: 400;
+}
+.form-sign-up .column{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    column-gap: 15px;
+}
+.sign-up-input i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #888;
+}
+.toggle-box{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.toggle-box::before{
+    content: '';
+    position: absolute;
+    left: -250%;
+    width: 300%;
+    height: 100%;
+    border-radius: 150px;
+    background: #032F30;
+    border: none;
+    z-index: 2;
+    transition: 1.8s ease-in-out;
+}
+.toggle-panel{
+    position:absolute;
+    width: 50%;
+    height: 100%;
+    color:#fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: .6s ease-in-out;
+}
+.toggle-panel.toggle-left{
+    left: 0;
+    transition-delay: 1.2s;
+}
+.toggle-panel.toggle-right{
+    right: -50%;
+    transition-delay: .6s;
+}
+.toggle-panel p{
+    margin-bottom: 20px;
+}
+.toggle-panel .btnLogin{
+    width: 160px;
+    height: 46px;
+    background: transparent;
+    border: 2px solid #fff;
+    box-shadow: none;
+}
+@media screen and (max-width:650px){
+    .login-cont{
+        height: calc(100vh - 20px);
+    }
+    .form-box{
+        width: 100%;
+        height: 70%;
+        bottom: 0;
+    }
+    .login-cont.active .form-box{
+        right: 0;
+        bottom: 30%;
+    }
+    .toggle-box::before{
+        width: 100%;
+        height: 300%;
+        top: -270%;
+        left: 0;
+    }
+    .login-cont.active .toggle-box::before{
+        top: 70%;
+        left: 0;
+    }
+    .toggle-panel{
+        width: 100%;
+        height: 30%;
+    }
+    .toggle-panel.toggle-left{
+        top: 0;
+    }
+    .login-cont.active .toggle-panel.toggle-left{
+        left: 0;
+        top: -30%;
+    }
+    .toggle-panel.toggle-right{
+        right: 0;
+        bottom: -30%;
+    }
+    .login-cont.active .toggle-panel.toggle-right{
+        bottom: 0;
+    }
+}
+@media screen and (max-width:400px) {
+    .form-box{
+        padding: 20px;
+    }
+    .toggle-panel h1{
+        font-size: 30px;
+    }
+}

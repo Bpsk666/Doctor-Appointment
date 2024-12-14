@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Specialty</title>
+  <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/CSS/control.css">
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo"></div>
+  <ul class="menu">
+    <li>
+      <a th:href="@{/adminsys/itemView}">
+        <i class="fa-solid fa-clipboard"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/addSpecialty}">
+        <i class="fa-solid fa-file-circle-plus"></i>
+        <span>Add Specialty</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/viewSpecialty}">
+        <i class="fa-solid fa-star-of-life"></i>
+        <span>View Specialty</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/newCategory}">
+        <i class="fa-regular fa-calendar-days"></i>
+        <span>Appointments</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{adminsys/viewDoc}">
+        <i class="fa-solid fa-user-doctor"></i>
+        <span>Doctors</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{adminsys/addDoctor}">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Add Doctor</span>
+      </a>
+    </li>
+    <li class="logout">
+      <a th:href="@{/adminsys/adminLogout}">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Log out</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="main-content">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <span>Admin</span>
+      <h2>Dashboard</h2>
+    </div>
+    <div class="user-info">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search">
+      </div>
+      <div class="profile-pic" th:text="${#strings.substring(admin.adminFName, 0, 1).toUpperCase()}"></div>
+    </div>
+  </div>
+  <div class="tabular-wrapper">
+    <div class="content-section">
+      <h2>New Specialty</h2>
+      <form th:action="@{/adminsys/newSpecialty}" method="post" th:object="${specialty}" class="form">
+        <div class="input-box">
+          <label>Specialty</label>
+          <input type="text"  name="specialtyField" id="specialtyField" th:field="*{specialtyField}" placeholder="Enter specialty">
+        </div>
+        <button type="submit" class="btn-spec">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

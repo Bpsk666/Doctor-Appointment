@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin View Specialty</title>
+  <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/CSS/control.css">
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo"></div>
+  <ul class="menu">
+    <li>
+      <a th:href="@{/adminsys/itemView}">
+        <i class="fa-solid fa-clipboard"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/addSpecialty}">
+        <i class="fa-solid fa-file-circle-plus"></i>
+        <span>Add Specialty</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/viewSpecialty}">
+        <i class="fa-solid fa-star-of-life"></i>
+        <span>View Specialty</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/newCategory}">
+        <i class="fa-regular fa-calendar-days"></i>
+        <span>Appointments</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/viewDoc}">
+        <i class="fa-solid fa-user-doctor"></i>
+        <span>Doctors</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/addDoctor}">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Add Doctor</span>
+      </a>
+    </li>
+    <li class="logout">
+      <a th:href="@{/adminsys/adminLogout}">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Log out</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="main-content">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <span>Admin</span>
+      <h2>Dashboard</h2>
+    </div>
+    <div class="user-info">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" name="" id="" placeholder="Search">
+      </div>
+      <div class="profile-pic" th:text="${#strings.substring(admin.adminFName, 0, 1).toUpperCase()}"></div>
+    </div>
+  </div>
+  <div class="tabular-wrapper">
+    <h2>Items</h2>
+    <div class="table-container" th:if="${not #lists.isEmpty(specialty)}">
+      <table class="table">
+        <thead class="thead">
+        <tr class="trow">
+          <th class="th">Specialty Id</th>
+          <th class="th">Specialty Field</th>
+          <th class="th">Delete</th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        <tr th:each="special: ${specialty}" class="trow">
+          <td th:text="${special.specialId}" class="td"></td>
+          <td th:text="${special.specialtyField}" class="td"></td>
+          <td class="td">
+            <div>
+              <form action="" method="get">
+                <button type="submit" class="table-btn">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div th:if="${#lists.isEmpty(specialty)}" class="no-item-message">
+      No specialty to show.
+    </div>
+  </div>
+</div>
+</body>
+</html>

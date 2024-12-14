@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/CSS/login.css">
+</head>
+<body>
+<div class="login-cont">
+  <div class="form-box login">
+    <form th:action="@{/adminsys/adminLoginSuccess}" method="post" th:object="${admin}">
+      <h1>Admin Login</h1>
+      <div class="login-input">
+        <input type="text" placeholder="Email or Phone Number" name="adminEmail" id="adminEmail" required>
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <div class="login-input">
+        <input type="password" placeholder="Password" name="adminPassword" id="adminPassword" required>
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="forget-link">
+        <a href="">Forgot Password?</a>
+      </div>
+      <button type="submit" class="btnLogin">Login</button>
+      <p>or login with social platforms</p>
+      <div class="social-icons">
+        <a href=""><i class="fa-brands fa-google"></i></a>
+        <a href=""><i class="fa-brands fa-facebook"></i></a>
+        <a href=""><i class="fa-brands fa-instagram"></i></a>
+        <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </form>
+  </div>
+  <div class="form-box register">
+    <form th:action="@{/docsys/docLoginSuccess}" method="post" th:object="${doctor}" class="form-sign-up">
+      <h1 class="login-header">Doctor Login</h1>
+      <div class="login-input">
+        <input type="text" placeholder="Email or Phone Number" name="docEmail" id="docEmail" required>
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <div class="login-input">
+        <input type="password" placeholder="Password" name="docPassword" id="docPassword" required>
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="forget-link">
+        <a href="">Forgot Password?</a>
+      </div>
+      <button type="submit" class="btnLogin">Login</button>
+      <p>or sign up with social platforms</p>
+      <div class="social-icons">
+        <a href=""><i class="fa-brands fa-google"></i></a>
+        <a href=""><i class="fa-brands fa-facebook"></i></a>
+        <a href=""><i class="fa-brands fa-instagram"></i></a>
+        <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </form>
+  </div>
+  <div class="toggle-box">
+    <div class="toggle-panel toggle-left">
+      <h1>Welcome back!</h1>
+      <p>Login as doctor?</p>
+      <button class="btnLogin register-btn">Login</button>
+    </div>
+    <div class="toggle-panel toggle-right">
+      <h1>Welcome back!</h1>
+      <p>Login as admin?</p>
+      <button class="btnLogin login-btn">Login</button>
+    </div>
+  </div>
+</div>
+
+<script src="/JavaScript/script.js">
+</script>
+</body>
+</html>

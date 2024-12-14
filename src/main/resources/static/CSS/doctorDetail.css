@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+}
+.doc-detail{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #031716;
+}
+.doc-card{
+    width: 830px;
+    display: flex;
+    justify-content: center;
+}
+.doc-img{
+    width: 53%;
+    height: 100%;
+}
+.detail-info{
+    width: 100%;
+    height: 400px;
+    background-color: #032f30;
+}
+.detail-info h2{
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    font-size: 18px;
+}
+.info{
+    color: #fff;
+    padding: 11px;
+    font-size: 14px;
+}
+.time {
+    background-color: #032f30;
+    display: block;
+    width: 100%;
+    height: 400px;
+    justify-content: center;
+    text-align: center;
+}
+.time-slot h2{
+    color:#fff;
+    text-align: center;
+    padding: 8px;
+    font-size: 18px;
+}
+.time-card{
+    border: 1px solid #ddd;
+    width: 200px;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px;
+}
+.time-card h3, p{
+    color: #fff;
+    font-size: 14px;
+}
+.doc-card .close i{
+    height: 15px;
+    position: absolute;
+    right: 23.5%;
+    top: 180px;
+    color: white;
+    transform: translateY(-50%);
+}
+.close i:hover{
+    color: red;
+}

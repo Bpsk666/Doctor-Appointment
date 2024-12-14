@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/CSS/control.css">
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo"></div>
+  <ul class="menu">
+    <li>
+      <a th:href="@{/adminsys/itemView}">
+        <i class="fa-solid fa-clipboard"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/docsys/addTimeSlot/{docId}(docId=${doc.docId})}">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Time Slots</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/docsys/viewTimeSlots/{docId}(docId=${doc.docId})}">
+        <i class="fa-regular fa-clock"></i>
+        <span>View Time</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/newCategory}">
+        <i class="fa-regular fa-calendar-days"></i>
+        <span>Appointments</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/docsys/updateDoctor/{docId}(docId=${doc.docId})}">
+        <i class="fa-solid fa-gear"></i>
+        <span>Setting</span>
+      </a>
+    </li>
+    <li class="logout">
+      <a th:href="@{/adminsys/adminLogout}">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Log out</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="main-content">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <span>Doctor</span>
+      <h2>Dashboard</h2>
+    </div>
+    <div class="user-info">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search">
+      </div>
+      <div class="profile-pic">
+        <img th:src="@{/adminsys/doctorImage/{docId}(docId=${doc.docId})}" alt="Doctor Image" class="doc-img">
+      </div>
+    </div>
+  </div>
+  <div class="tabular-wrapper">
+    <div class="content-section">
+      <!-- Add your main page content here -->
+      <h2>Dashboard Overview</h2>
+      <p>Here you can manage items, shops, categories, and more.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

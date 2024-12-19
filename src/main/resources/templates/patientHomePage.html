@@ -26,7 +26,7 @@
         <div class="dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userProfileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <!-- Profile image -->
-                <div class="profile-pic" th:text="${#strings.substring(patient.patientFName,0,1).toUpperCase()}"></div>
+                <div class="profile-pic" style="background-color: #fb923c" th:text="${#strings.substring(patient.patientFName,0,1).toUpperCase()}"></div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userProfileDropdown">
                 <li><a class="dropdown-item" th:href="@{/custsys/profile}">View Profile</a></li>

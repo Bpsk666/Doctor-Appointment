@@ -26,6 +26,9 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository apptRepo;
 
+    public Appointment findAptById(long aptId){
+        return apptRepo.findById(aptId).get();
+    }
     public void bookAppointment(long patientId, long doctorId, long timeSlotId) throws Exception {
         Patient patient = patientRep.findById(patientId).get();
         Doctor doctor = docRep.findById(doctorId).get();
@@ -39,23 +42,23 @@ public class AppointmentService {
         tsRep.save(timeSlot);
     }
 
-    public List<Appointment> getAptByDocAndStatus(Doctor doctor, AppointmentStatus status){
-        return apptRepo.findByDoctorAndStatus(doctor,status);
+    public List<Appointment> getAptByDocAndStatus(long doctorId, AppointmentStatus status){
+        return apptRepo.findByDoctorAndStatus(doctorId,status);
     }
 
-    public List<Appointment> pendingAppointments(Doctor doctor){
-        return getAptByDocAndStatus(doctor, AppointmentStatus.PENDING);
+    public List<Appointment> pendingAppointments(long doctorId){
+        return getAptByDocAndStatus(doctorId, AppointmentStatus.PENDING);
     }
 
-    public List<Appointment> completedAppointments(Doctor doctor){
-        return getAptByDocAndStatus(doctor, AppointmentStatus.COMPLETED);
+    public List<Appointment> completedAppointments(long doctorId){
+        return getAptByDocAndStatus(doctorId, AppointmentStatus.COMPLETED);
     }
 
-    public List<Appointment> confirmedAppointments(Doctor doctor){
-        return getAptByDocAndStatus(doctor, AppointmentStatus.CONFIRMED);
+    public List<Appointment> confirmedAppointments(long doctorId){
+        return getAptByDocAndStatus(doctorId, AppointmentStatus.CONFIRMED);
     }
 
-    public List<Appointment> cancelledAppointments(Doctor doctor){
-        return getAptByDocAndStatus(doctor, AppointmentStatus.CANCELLED);
+    public List<Appointment> cancelledAppointments(long doctorId){
+        return getAptByDocAndStatus(doctorId, AppointmentStatus.CANCELLED);
     }
 }

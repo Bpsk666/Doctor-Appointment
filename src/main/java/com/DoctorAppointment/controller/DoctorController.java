@@ -3,6 +3,7 @@ package com.DoctorAppointment.controller;
 import com.DoctorAppointment.DTO.DoctorDTO;
 import com.DoctorAppointment.model.Doctor;
 import com.DoctorAppointment.model.TimeSlot;
+import com.DoctorAppointment.service.AppointmentService;
 import com.DoctorAppointment.service.DoctorService;
 import com.DoctorAppointment.service.SpecialtyService;
 import com.DoctorAppointment.service.TimeSlotService;
@@ -25,6 +26,8 @@ public class DoctorController {
     private SpecialtyService specialSer;
     @Autowired
     private TimeSlotService tsSer;
+    @Autowired
+    private AppointmentService aptSer;
     @Autowired
     private HttpSession session;
 
@@ -95,5 +98,12 @@ public class DoctorController {
         Doctor doctor = docSer.getDocById(docId);
         model.addAttribute("timeSlots",tsSer.getTimeSlotByDoctor(doctor));
         return "docViewTimeSlots";
+    }
+
+    @GetMapping("/viewPendingApt/{docId}")
+    public String viewPendingApt(@PathVariable("docId")long docId,Model model){
+        model.addAttribute("doc",session.getAttribute("doc"));
+        model.addAttribute("pendApt",aptSer.pendingAppointments(docId));
+        return "docViewPending";
     }
 }

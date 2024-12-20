@@ -57,7 +57,13 @@
     <div class="slots" id="slot-container">
 
     </div>
-    <button class="book-btn">Book an appointment</button>
+    <form th:action="@{/aptSys/bookApt}" method="post">
+      <input type="hidden" name="patientId" th:value="${patient.patientId}">
+      <input type="hidden" name="doctorId" th:value="${doc.docId}">
+      <input type="hidden" id="timeSlotId" name="timeSlotId">
+      <button class="book-btn" >Book an appointment</button>
+    </form>
+
   </div>
 </div>
 <footer class="footer">

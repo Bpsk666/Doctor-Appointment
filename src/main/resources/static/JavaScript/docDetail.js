@@ -1,7 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
     const doctorId = getDoctorId();
     fetchDaysAndSlots(doctorId);
+
+    const slotContainer = document.getElementById("slot-container");
+    const timeSlotInput = document.getElementById("timeSlotId");
+
+    slotContainer.addEventListener("click",(event)=>{
+        if(event.target.classList.contains("slot-button")){
+            document.querySelectorAll(".slot-button").forEach(slot=>slot.classList.remove("active"));
+            event.target.classList.add("active");
+            timeSlotInput.value=event.target.dataset.slotId;
+        }
+    });
 });
+
+
 
 async function fetchDaysAndSlots(doctorId) {
     try {
@@ -53,6 +66,7 @@ function populateSlots(slots) {
             const slotButton = document.createElement("button");
             slotButton.textContent = `${slot.startTime} - ${slot.endTime}`;
             slotButton.className = "slot-button";
+            slotButton.dataset.slotId = slot.slotId;
             slotButton.addEventListener("click", () => {
                 document.querySelectorAll(".slot-button").forEach((s) => s.classList.remove("active"));
                 slotButton.classList.add("active");
@@ -64,7 +78,12 @@ function populateSlots(slots) {
 }
 
 function selectSlot(slot) {
-    alert(`You selected: ${slot.startTime} - ${slot.endTime}`);
+    if(!slot.slot_id){
+        console.error("Invalid slot selected: ",slot);
+    }
+    const hiddenInput = document.getElementById("timeSlotId");
+    hiddenInput.value = slot.slot_id;
+    console.log(`Selected slot: ${slot.startTime} - ${slot.endTime}`);
 }
 
 function groupSlotsByDate(slots) {

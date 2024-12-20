@@ -85,4 +85,5 @@ public class PatientController {
         model.addAttribute("timeSlots",tsSer.getTimeSlotByDoctor(doc));
         return "patientViewDocDetail";
     }
+
 }

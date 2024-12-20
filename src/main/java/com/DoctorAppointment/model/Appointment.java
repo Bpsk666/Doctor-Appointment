@@ -23,7 +23,6 @@ public class Appointment {
     @OneToOne
     private TimeSlot timeSlot;
 
-    private LocalDateTime bookingDateTime;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status = AppointmentStatus.PENDING;
@@ -32,11 +31,10 @@ public class Appointment {
         super();
     }
 
-    public Appointment(Patient patient, Doctor doctor, TimeSlot timeSlot, LocalDateTime bookingDateTime, AppointmentStatus status) {
+    public Appointment(Patient patient, Doctor doctor, TimeSlot timeSlot, AppointmentStatus status) {
         this.patient = patient;
         this.doctor = doctor;
         this.timeSlot = timeSlot;
-        this.bookingDateTime = bookingDateTime;
         this.status = status;
     }
 
@@ -70,14 +68,6 @@ public class Appointment {
 
     public void setTimeSlot(TimeSlot timeSlot) {
         this.timeSlot = timeSlot;
-    }
-
-    public LocalDateTime getBookingDateTime() {
-        return bookingDateTime;
-    }
-
-    public void setBookingDateTime(LocalDateTime bookingDateTime) {
-        this.bookingDateTime = bookingDateTime;
     }
 
     public AppointmentStatus getStatus() {

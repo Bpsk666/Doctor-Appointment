@@ -85,7 +85,7 @@
           <td class="td"><span th:text="${apt.timeSlot.startTime}"></span> - <span th:text="${apt.timeSlot.endTime}"></span></td>
           <td class="td">
             <div>
-              <form action="" method="get">
+              <form th:action="@{/docsys/confirmApt/{aptId}(aptId=${apt.apptId})}" method="post">
                 <button type="submit" class="table-btn">Confirm</button>
               </form>
             </div>

@@ -1,8 +1,11 @@
 package com.DoctorAppointment.controller;
 
 import com.DoctorAppointment.DTO.DoctorDTO;
+import com.DoctorAppointment.enums.AppointmentStatus;
+import com.DoctorAppointment.model.Appointment;
 import com.DoctorAppointment.model.Doctor;
 import com.DoctorAppointment.model.TimeSlot;
+import com.DoctorAppointment.repository.AppointmentRepository;
 import com.DoctorAppointment.service.AppointmentService;
 import com.DoctorAppointment.service.DoctorService;
 import com.DoctorAppointment.service.SpecialtyService;
@@ -28,6 +31,8 @@ public class DoctorController {
     private TimeSlotService tsSer;
     @Autowired
     private AppointmentService aptSer;
+    @Autowired
+    private AppointmentRepository aptRep;
     @Autowired
     private HttpSession session;
 
@@ -105,5 +110,22 @@ public class DoctorController {
         model.addAttribute("doc",session.getAttribute("doc"));
         model.addAttribute("pendApt",aptSer.pendingAppointments(docId));
         return "docViewPending";
+    }
+    @PostMapping("/confirmApt/{aptId}")
+    public String confirmApt(@PathVariable("aptId")long aptId, Model model){
+        model.addAttribute("doc",session.getAttribute("doc"));
+        Appointment apt = aptSer.findAptById(aptId);
+        if(apt==null){
+            model.addAttribute("error","Appointment not found!");
+        }
+        apt.setStatus(AppointmentStatus.CONFIRMED);
+        aptRep.save(apt);
+        return "docDashboard";
+    }
+    @GetMapping("/viewConfirmApt/{docId}")
+    public String viewConfirmApt(@PathVariable("docId")long docId, Model model){
+        model.addAttribute("doc",session.getAttribute("doc"));
+        model.addAttribute("confirmApt",aptSer.confirmedAppointments(docId));
+        return "docViewConfirm";
     }
 }

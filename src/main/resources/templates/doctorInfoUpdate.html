@@ -13,21 +13,34 @@
   <div class="logo"></div>
   <ul class="menu">
     <li>
-      <a th:href="@{/adminsys/itemView}">
+      <a th:href="@{/docsys/viewConfirmApt/{docId}(docId=${doc.docId})}">
         <i class="fa-solid fa-clipboard"></i>
         <span>Dashboard</span>
       </a>
     </li>
     <li>
-      <a th:href="@{/adminsys/newCategory}">
+      <a th:href="@{/docsys/addTimeSlot/{docId}(docId=${doc.docId})}">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Time Slots</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/docsys/viewTimeSlots/{docId}(docId=${doc.docId})}">
+        <i class="fa-regular fa-clock"></i>
+        <span>View Time</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/docsys/viewPendingApt/{docId}(docId=${doc.docId})}">
         <i class="fa-regular fa-calendar-days"></i>
         <span>Appointments</span>
       </a>
     </li>
-    <li>
-      <a th:href="@{/docsys/updateDoctor/{docId}(docId=${doctor.docId})}">
+    <li class="active">
+      <a th:href="@{/docsys/updateDoctor/{docId}(docId=${doc.docId})}">
         <i class="fa-solid fa-gear"></i>
         <span>Setting</span>
+      </a>
     </li>
     <li class="logout">
       <a th:href="@{/adminsys/adminLogout}">
@@ -40,13 +53,13 @@
 <div class="main-content">
   <div class="header-wrapper">
     <div class="header-title">
-      <span>Doctor</span>
-      <h2>Dashboard</h2>
+      <div class="nav__logo">Health<span>Care</span></div>
+      <span class="header-span">Doctor Dashboard</span>
     </div>
     <div class="user-info">
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Search" class="search-input">
       </div>
       <div class="profile-pic">
         <img th:src="@{/adminsys/doctorImage/{docId}(docId=${doctor.docId})}" alt="Doctor Image" class="doc-img">

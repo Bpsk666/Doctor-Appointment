@@ -46,6 +46,7 @@ public class DoctorController {
 
     @GetMapping("/updateDoctor/{docId}")
     public String updateDoctor(@PathVariable("docId")long docId, Model model){
+        model.addAttribute("doc",session.getAttribute("doc"));
         model.addAttribute("doctor",docSer.getDocById(docId));
         model.addAttribute("specialty",specialSer.findAllSpecialty());
         return "doctorInfoUpdate";

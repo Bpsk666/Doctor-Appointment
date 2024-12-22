@@ -18,7 +18,7 @@
         <span>Dashboard</span>
       </a>
     </li>
-    <li>
+    <li class="active">
       <a th:href="@{/adminsys/addSpecialty}">
         <i class="fa-solid fa-file-circle-plus"></i>
         <span>Add Specialty</span>
@@ -59,13 +59,13 @@
 <div class="main-content">
   <div class="header-wrapper">
     <div class="header-title">
-      <span>Admin</span>
-      <h2>Dashboard</h2>
+      <div class="nav__logo">Health<span>Care</span></div>
+      <span class="header-span">Admin Dashboard</span>
     </div>
     <div class="user-info">
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Search" class="search-input">
       </div>
       <div class="profile-pic" th:text="${#strings.substring(admin.adminFName, 0, 1).toUpperCase()}"></div>
     </div>

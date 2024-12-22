@@ -75,6 +75,18 @@ body {
     width: 100%;
     padding: 1rem;
 }
+.nav__logo {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: white;
+}
+
+.nav__logo span {
+    color: #fb923c;
+}
+.header-span{
+    font-size: 14px;
+}
 .profile-pic{
     width: 50px;
     height: 50px;

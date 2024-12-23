@@ -61,4 +61,8 @@ public class AppointmentService {
     public List<Appointment> cancelledAppointments(long doctorId){
         return getAptByDocAndStatus(doctorId, AppointmentStatus.CANCELLED);
     }
+
+    public List<Appointment> findAllConfirmApts(AppointmentStatus confirmed){
+        return apptRepo.findByStatus(AppointmentStatus.CONFIRMED);
+    }
 }

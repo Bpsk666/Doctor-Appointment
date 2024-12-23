@@ -1,14 +1,10 @@
 package com.DoctorAppointment.controller;
 
 import com.DoctorAppointment.DTO.DoctorDTO;
-import com.DoctorAppointment.model.Admin;
-import com.DoctorAppointment.model.Doctor;
-import com.DoctorAppointment.model.Specialty;
-import com.DoctorAppointment.model.TimeSlot;
-import com.DoctorAppointment.service.AdminService;
-import com.DoctorAppointment.service.DoctorService;
-import com.DoctorAppointment.service.SpecialtyService;
-import com.DoctorAppointment.service.TimeSlotService;
+import com.DoctorAppointment.enums.AppointmentStatus;
+import com.DoctorAppointment.model.*;
+import com.DoctorAppointment.repository.AppointmentRepository;
+import com.DoctorAppointment.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -37,6 +33,10 @@ public class AdminController {
     private SpecialtyService specialSer;
     @Autowired
     private TimeSlotService tsSer;
+    @Autowired
+    private AppointmentService aptSer;
+    @Autowired
+    private AppointmentRepository aptRep;
     @Autowired
     private HttpSession httpSession;
 
@@ -146,5 +146,22 @@ public class AdminController {
         docSer.deleteDoc(docId);
         return "adminDashboard";
     }
+    @GetMapping("/viewAllConfirm")
+    public String viewAllConfirmApts(Model model){
+        model.addAttribute("admin",httpSession.getAttribute("admin"));
+        model.addAttribute("confirmApt",aptSer.findAllConfirmApts(AppointmentStatus.CONFIRMED));
+        return "adminViewConfirm";
+    }
 
+    @PostMapping("/aptComplete/{aptId}")
+    public String makeAptComplete(@PathVariable("aptId")long aptId, Model model){
+        model.addAttribute("admin",httpSession.getAttribute("admin"));
+        Appointment apt = aptSer.findAptById(aptId);
+        if(apt==null){
+            model.addAttribute("Error","No Appointment Found!");
+        }
+        apt.setStatus(AppointmentStatus.COMPLETED);
+        aptRep.save(apt);
+        return "adminDashboard";
+    }
 }

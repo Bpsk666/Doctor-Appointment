@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/CSS/control.css">
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo"></div>
+  <ul class="menu">
+    <li>
+      <a th:href="@{/adminsys/itemView}">
+        <i class="fa-solid fa-clipboard"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/addSpecialty}">
+        <i class="fa-solid fa-file-circle-plus"></i>
+        <span>Add Specialty</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/viewSpecialty}">
+        <i class="fa-solid fa-star-of-life"></i>
+        <span>View Specialty</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/newCategory}">
+        <i class="fa-regular fa-calendar-days"></i>
+        <span>Appointments</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/viewDoc}">
+        <i class="fa-solid fa-user-doctor"></i>
+        <span>Doctors</span>
+      </a>
+    </li>
+    <li>
+      <a th:href="@{/adminsys/addDoctor}">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Add Doctor</span>
+      </a>
+    </li>
+    <li class="logout">
+      <a th:href="@{/adminsys/adminLogout}">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Log out</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="main-content">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <div class="nav__logo">Health<span>Care</span></div>
+      <span class="header-span">Admin Dashboard</span>
+    </div>
+    <div class="user-info">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search" class="search-input">
+      </div>
+      <div class="profile-pic" th:text="${#strings.substring(admin.adminFName, 0, 1).toUpperCase()}"></div>
+    </div>
+  </div>
+  <div class="tabular-wrapper">
+    <h2>Appointments</h2>
+    <div class="table-container" th:if="${not #lists.isEmpty(confirmApt)}">
+      <table class="table">
+        <thead class="thead">
+        <tr class="trow">
+          <th class="th">Appointment ID</th>
+          <th class="th">Doctor Name</th>
+          <th class="th">Patient Name</th>
+          <th class="th">Appointment Time</th>
+          <th class="th">Status</th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        <tr th:each="apt: ${confirmApt}" class="trow">
+          <td th:text="${apt.apptId}" class="td"></td>
+          <td th:text="${apt.doctor.docFName}" class="td"></td>
+          <td th:text="${apt.patient.patientFName}" class="td"></td>
+          <td class="td"><span th:text="${apt.timeSlot.startTime}"></span> - <span th:text="${apt.timeSlot.endTime}"></span></td>
+          <td class="td">
+            <form th:action="@{/adminsys/aptComplete/{aptId}(aptId=${apt.apptId})}" method="post">
+              <button type="submit" class="table-btn">Done</button>
+            </form>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div th:if="${#lists.isEmpty(confirmApt)}" class="no-item-message">
+      No Appointment to show.
+    </div>
+  </div>
+</div>
+</body>
+</html>

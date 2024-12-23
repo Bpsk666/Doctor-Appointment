@@ -26,8 +26,14 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository apptRepo;
 
+    public List<Appointment> findAllApts(){
+        return apptRepo.findAll();
+    }
     public Appointment findAptById(long aptId){
         return apptRepo.findById(aptId).get();
+    }
+    public List<Appointment> findAptByPatient(Patient patient){
+        return apptRepo.findByPatient(patient);
     }
     public void bookAppointment(long patientId, long doctorId, long timeSlotId) throws Exception {
         Patient patient = patientRep.findById(patientId).get();

@@ -18,6 +18,9 @@ public class PatientService {
     public void savePatient(Patient patient){
         patientRep.save(patient);
     }
+    public Patient findPatientById(long patientId){
+        return patientRep.findById(patientId).get();
+    }
     public String checkLogin(String patientEmail, String patientPassword){
         Patient patient = patientRep.findByPatientEmail(patientEmail);
         if(patient!=null){

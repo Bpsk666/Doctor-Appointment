@@ -196,6 +196,9 @@ body {
 .table-btn:hover{
     color: red;
 }
+.no-item-message{
+    color: white;
+}
 /*.container header{*/
 /*    font-size: 1.5rem;*/
 /*    color: #333;*/

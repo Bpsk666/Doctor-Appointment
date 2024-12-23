@@ -164,4 +164,11 @@ public class AdminController {
         aptRep.save(apt);
         return "adminDashboard";
     }
+
+    @GetMapping("/viewAllApt")
+    public String viewAllAppointments(Model model){
+        model.addAttribute("admin",httpSession.getAttribute("admin"));
+        model.addAttribute("allApt",aptSer.findAllApts());
+        return "adminViewAllApts";
+    }
 }

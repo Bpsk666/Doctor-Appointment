@@ -2,12 +2,11 @@ package com.DoctorAppointment.controller;
 
 import com.DoctorAppointment.model.Doctor;
 import com.DoctorAppointment.model.Patient;
-import com.DoctorAppointment.service.DoctorService;
-import com.DoctorAppointment.service.PatientService;
-import com.DoctorAppointment.service.SpecialtyService;
-import com.DoctorAppointment.service.TimeSlotService;
+import com.DoctorAppointment.service.*;
 import jakarta.servlet.http.HttpSession;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +23,8 @@ public class PatientController {
     private SpecialtyService specialSer;
     @Autowired
     private TimeSlotService tsSer;
+    @Autowired
+    private AppointmentService aptSer;
     @Autowired
     private HttpSession session;
 
@@ -84,6 +85,14 @@ public class PatientController {
         model.addAttribute("doc",doc);
         model.addAttribute("timeSlots",tsSer.getTimeSlotByDoctor(doc));
         return "patientViewDocDetail";
+    }
+
+    @GetMapping("/viewApt/{patientId}")
+    public String viewAppointments(@PathVariable("patientId")long patientId, Model model){
+        model.addAttribute("patient",session.getAttribute("patient"));
+        Patient patient = patientSer.findPatientById(patientId);
+        model.addAttribute("allApt",aptSer.findAptByPatient(patient));
+        return "patientViewAppointments";
     }
 
 }

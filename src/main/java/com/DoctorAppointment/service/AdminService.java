@@ -17,19 +17,18 @@ public class AdminService {
 
     public String checkLogin(String adminEmail, String adminPassword){
         Admin admin = adminRep.findByAdminEmail(adminEmail);
-        if(admin==null){
-            return "adminLogin";
+        if(admin!=null){
+            if(passwordEncoder.matches(adminPassword, admin.getAdminPassword()))
+            {
+                adminPassword = admin.getAdminPassword();
+            }
+            admin = adminRep.findByAdminEmailAndAdminPassword(adminEmail, adminPassword);
+            if(admin==null)
+            {
+                return "adminLogin";
+            }
         }
-        if(passwordEncoder.matches(adminPassword, admin.getAdminPassword()))
-        {
-            adminPassword = admin.getAdminPassword();
-        }
-        admin = adminRep.findByAdminEmailAndAdminPassword(adminEmail, adminPassword);
-        if(admin==null)
-        {
-            return "adminLogin";
-        }
-        return "adminDashboard";
+        return "redirect:/adminsys/adminHomePage";
     }
     public Admin getAdmin(String adminEmail, String adminPassword)
     {

@@ -129,4 +129,11 @@ public class DoctorController {
         model.addAttribute("confirmApt",aptSer.confirmedAppointments(docId));
         return "docViewConfirm";
     }
+    @GetMapping("/docViewAllApt/{docId}")
+    public String viewallApt(@PathVariable("docId")long docId, Model model){
+        model.addAttribute("doc",session.getAttribute("doc"));
+        Doctor doctor = docSer.getDocById(docId);
+        model.addAttribute("docApt",aptSer.findAptByDoctor(doctor));
+        return "docViewAllApt";
+    }
 }

@@ -9,17 +9,17 @@
   />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/CSS/homePage.css" />
-  <title>HealthCare</title>
+  <title>CityStar</title>
 </head>
 <body>
 <header>
   <nav class="section__container nav__container">
-    <div class="nav__logo">Health<span>Care</span></div>
+    <div class="nav__logo">City<span>Star</span></div>
     <ul class="nav__links">
       <li class="link"><a href="#home">Home</a></li>
       <li class="link"><a href="#about">Doctors</a></li>
       <li class="link"><a href="#service">About Us</a></li>
-      <li class="link"><a href="#pages">Services</a></li>
+      <li class="link"><a href="#pages">Appointments</a></li>
       <li class="link"><a href="#blog">Pages</a></li>
     </ul>
     <a href="javascript:void(0)" class="btn" onclick="openOverlay()">Login</a>
@@ -103,13 +103,13 @@
     </p>
   </div>
   <div class="about__image">
-    <img src="assets/about.jpg" alt="about" />
+    <img src="/Images/about.jpg" alt="about" />
   </div>
 </section>
 
 <section class="section__container why__container" id="blog">
   <div class="why__image">
-    <img src="assets/choose-us.jpg" alt="why choose us" />
+    <img src="/Images/choose-us.jpg" alt="why choose us" />
   </div>
   <div class="why__content">
     <h2 class="section__header">Why Choose Us</h2>
@@ -164,7 +164,7 @@
   <div class="doctors__grid">
     <div class="doctors__card">
       <div class="doctors__card__image">
-        <img src="assets/doctor-1.jpg" alt="doctor" />
+        <img src="/Images/doctor-1.jpg" alt="doctor" />
         <div class="doctors__socials">
           <span><i class="ri-instagram-line"></i></span>
           <span><i class="ri-facebook-fill"></i></span>
@@ -177,7 +177,7 @@
     </div>
     <div class="doctors__card">
       <div class="doctors__card__image">
-        <img src="assets/doctor-2.jpg" alt="doctor" />
+        <img src="/Images/doctor-2.jpg" alt="doctor" />
         <div class="doctors__socials">
           <span><i class="ri-instagram-line"></i></span>
           <span><i class="ri-facebook-fill"></i></span>
@@ -190,7 +190,7 @@
     </div>
     <div class="doctors__card">
       <div class="doctors__card__image">
-        <img src="assets/doctor-3.jpg" alt="doctor" />
+        <img src="/Images/doctor-3.jpg" alt="doctor" />
         <div class="doctors__socials">
           <span><i class="ri-instagram-line"></i></span>
           <span><i class="ri-facebook-fill"></i></span>
@@ -207,7 +207,7 @@
 <footer class="footer">
   <div class="section__container footer__container">
     <div class="footer__col">
-      <h3>Health<span>Care</span></h3>
+      <h3>City<span>Star</span></h3>
       <p>
         We are honored to be a part of your healthcare journey and committed
         to delivering compassionate, personalized, and top-notch care every
@@ -245,7 +245,7 @@
   </div>
   <div class="footer__bar">
     <div class="footer__bar__content">
-      <p>Copyright © 2024 Health Care. All rights reserved.</p>
+      <p>Copyright © 2024 City Star. All rights reserved.</p>
       <div class="footer__socials">
         <span><i class="ri-instagram-line"></i></span>
         <span><i class="ri-facebook-fill"></i></span>
@@ -268,6 +268,9 @@
           <input type="password" placeholder="Password" name="patientPassword" id="patientPassword" required>
           <i class="fa-solid fa-lock"></i>
         </div>
+        <div class="error-message" style="color:red;">
+          <span th:text="${errorMessage}"></span>
+        </div>
         <div class="forget-link">
           <a href="">Forgot Password?</a>
         </div>
@@ -280,6 +283,13 @@
           <a href=""><i class="fa-brands fa-x-twitter"></i></a>
         </div>
       </form>
+      <div id="errorModal" class="modal">
+        <div class="modal-content">
+          <h2>Error</h2>
+          <p id="errorMessage"></p>
+          <button class="close-btn" onclick="closeModal()">OK</button>
+        </div>
+      </div>
     </div>
     <div class="form-box register">
       <form th:action="@{/patientSys/newPatient}" method="post" th:object="${patient}" class="form-sign-up">
@@ -368,6 +378,15 @@
   // Close overlay on outside click
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) closeOverlay();
+  });
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const showError = "${showError}";
+    const errorMessage = "Invalid email or password. Please try again.";
+
+    if (showError) {
+      alert(errorMessage);
+    }
   });
 </script>
 </body>

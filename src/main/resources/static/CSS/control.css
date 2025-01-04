@@ -24,7 +24,7 @@ body {
     background: #032F30;
 }
 .sidebar:hover{
-    width: 240px;
+    width: 248px;
     transition: 0.5s;
 }
 .logo{
@@ -194,7 +194,7 @@ body {
     cursor: pointer;
 }
 .table-btn:hover{
-    color: red;
+    color: lightgreen;
 }
 .no-item-message{
     color: white;

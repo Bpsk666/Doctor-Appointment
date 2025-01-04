@@ -780,6 +780,38 @@ form{
     font-size: 20px;
     color: #888;
 }
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    text-align: center;
+}
+
+.modal-content h2 {
+    color: #ff4d4d;
+}
+
+.close-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
 .forget-link{
     margin:-15px 0 15px;
 }
@@ -986,7 +1018,31 @@ form{
     color: #333;
     cursor: pointer;
 }
+.slot-button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.slot-button:hover {
+    background-color: #e2e6ea;
+}
+
+.slot-button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.slot-button.booked {
+    background-color: #e0e0e0;
+    color: #a9a9a9;
+    cursor: not-allowed;
+    opacity: 0.6; /* Reduce opacity for booked slots */
+}
 .day.active {
     background-color: #032f30;
     color: #fff;
@@ -1015,7 +1071,12 @@ form{
     color: #333;
     flex: 1;
 }
-
+.slots button .booked{
+    background-color: #e0e0e0;
+    color: #a9a9a9;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
 .slots button.active {
     background-color: #032f30;
     color: #fff;
@@ -1037,6 +1098,46 @@ form{
 
 .book-btn:hover {
     background-color: #045b60;
+}
+.note-msg{
+    opacity: 0.6;
+    margin-left: 10px;
+}
+.notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #032f30;
+    color: #ffffff;
+    padding: 15px 30px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.notification i {
+    font-size: 20px;
+    color: lightgreen;
+}
+
+.hidden {
+    display: none;
+}
+.error-message{
+    display: none;
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+.error-message i{
+    color: red;
+    font-size: 0.9rem;
 }
 @media screen and (max-width:650px){
     .login-cont{
@@ -1120,7 +1221,7 @@ form{
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    margin-top: 20px;
+    margin-top: 25px;
     overflow: hidden;
     flex-shrink: 0;
 }
@@ -1152,21 +1253,25 @@ form{
     margin: 10px 0;
 }
 
-.cancel{
-    background-color: #fff;
-    color: #032F30;
-    border: 1px solid #ddd;
+.cancel {
     margin-top: 100px;
     display: flex;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.cancel form button {
     background-color: white;
+    color: #032F30;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
     font-size: 14px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
-.cancel:hover{
+
+.cancel form button:hover {
     background-color: red;
     color: white;
 }

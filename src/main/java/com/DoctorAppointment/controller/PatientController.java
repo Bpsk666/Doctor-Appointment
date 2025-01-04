@@ -1,5 +1,6 @@
 package com.DoctorAppointment.controller;
 
+import com.DoctorAppointment.model.Appointment;
 import com.DoctorAppointment.model.Doctor;
 import com.DoctorAppointment.model.Patient;
 import com.DoctorAppointment.service.*;
@@ -30,6 +31,8 @@ public class PatientController {
 
     @GetMapping("/homePage")
     public String homePage(Model model){
+        session.removeAttribute("showError");
+        model.addAttribute("showError",false);
         model.addAttribute("patient",new Patient());
         return "homePage";
     }
@@ -49,18 +52,21 @@ public class PatientController {
         return "patientHomePage";
     }
     @PostMapping("/patientLogin")
-    public String patientLogin(@RequestParam("patientEmail")String patientEmail, @RequestParam("patientPassword")String patientPassword,Model model){
-        String res = patientSer.checkLogin(patientEmail,patientPassword);
-        if(res.equals("redirect:/patientSys/patientHomePage")){
-            model.addAttribute("patient",patientSer.getPatient(patientEmail,patientPassword));
-            Patient patient = patientSer.getPatient(patientEmail,patientPassword);
-            session.setAttribute("patient",patient);
-            session.setAttribute("patientId",patient.getPatientId());
-        }
-        else{
+    public String patientLogin(@RequestParam("patientEmail") String patientEmail,
+                               @RequestParam("patientPassword") String patientPassword,
+                               Model model) {
+        String res = patientSer.checkLogin(patientEmail, patientPassword);
+        if (res.equals("redirect:/patientSys/patientHomePage")) {
+            Patient patient = patientSer.getPatient(patientEmail, patientPassword);
+            session.setAttribute("patient", patient);
+            session.setAttribute("patientId", patient.getPatientId());
+            return "redirect:/patientSys/patientHomePage";
+        } else {
+            model.addAttribute("patient",new Patient());
+            model.addAttribute("showError", true);
+            model.addAttribute("errorMessage", "Invalid email or password. Please try again.");
             return "homePage";
         }
-        return "redirect:/patientSys/patientHomePage";
     }
     @GetMapping("/viewDoctors")
     public String viewDocs(Model model){
@@ -94,5 +100,10 @@ public class PatientController {
         model.addAttribute("allApt",aptSer.findAptByPatient(patient));
         return "patientViewAppointments";
     }
-
+    @PostMapping("/cancelApt/{aptId}")
+    public String cancelAppointments(@PathVariable("aptId")long aptId, Model model){
+        model.addAttribute("patient",session.getAttribute("patient"));
+        aptSer.cancelApt(aptId);
+        return "patientHomePage";
+    }
 }

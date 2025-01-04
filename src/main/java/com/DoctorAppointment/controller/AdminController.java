@@ -7,6 +7,7 @@ import com.DoctorAppointment.repository.AppointmentRepository;
 import com.DoctorAppointment.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -44,13 +45,25 @@ public class AdminController {
     public String adminLoginPage() {
         return "Login";
     }
-
+    @GetMapping("/adminHomePage")
+    public String adminHomePage(Model model){
+        Admin admin = (Admin) httpSession.getAttribute("admin");
+        if(admin==null){
+            return "Login";
+        }
+        model.addAttribute("admin",admin);
+        return "adminDashboard";
+    }
     @PostMapping("/adminLoginSuccess")
     public String adminLoginSuccess(@RequestParam("adminEmail")String adminEmail, @RequestParam("adminPassword")String adminPassword, Model model) {
-        model.addAttribute("admin",adminSer.getAdmin(adminEmail,adminPassword));
-        model.addAttribute("doctor",docSer.getAllDoc());
-        httpSession.setAttribute("admin",adminSer.getAdmin(adminEmail,adminPassword));
-        return adminSer.checkLogin(adminEmail,adminPassword);
+        String res = adminSer.checkLogin(adminEmail,adminPassword);
+        if(res.equals("redirect:/adminsys/adminHomePage")){
+            httpSession.setAttribute("admin",adminSer.getAdmin(adminEmail,adminPassword));
+            return "redirect:/adminsys/adminHomePage";
+        }
+        else{
+            return "Login";
+        }
     }
     @GetMapping("/addDoctor")
     public String addDoctor(Model model) {
@@ -85,7 +98,7 @@ public class AdminController {
             model.addAttribute("error","Error uploading image");
             return "adminAddDoctor";
         }
-        return "adminDashboard";
+        return "redirect:/adminsys/adminHomePage";
     }
     @GetMapping("/viewDoc")
     public String adminViewDoctor( Model model){
@@ -110,6 +123,7 @@ public class AdminController {
         }
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(doc.getProfileImage());
     }
+
     @GetMapping("/addSpecialty")
     public String addSpecialty(Model model) {
         model.addAttribute("admin",httpSession.getAttribute("admin"));
@@ -134,17 +148,12 @@ public class AdminController {
         model.addAttribute("special",specialSer.findSepcialtyById(specialId));
         return "somePage";
     }
-    @GetMapping("/deleteDoctor/{docId}")
-    public String deleteDoctor(@PathVariable("docId")long docId,Model model){
-        model.addAttribute("admin",httpSession.getAttribute("admin"));
-        docSer.deleteDoc(docId);
-        return "adminDashboard";
-    }
+
     @PostMapping("/deleteDocProcess/{docId}")
     public String deleteProcess(@PathVariable("docId")long docId, Model model){
         model.addAttribute("admin",httpSession.getAttribute("admin"));
         docSer.deleteDoc(docId);
-        return "adminDashboard";
+        return "redirect:/adminsys/viewDoc";
     }
     @GetMapping("/viewAllConfirm")
     public String viewAllConfirmApts(Model model){

@@ -35,6 +35,12 @@ public class AppointmentService {
     public List<Appointment> findAptByPatient(Patient patient){
         return apptRepo.findByPatient(patient);
     }
+    public List<Appointment> findAptByDoctor(Doctor doctor){
+        return apptRepo.findByDoctor(doctor);
+    }
+    public void cancelApt(long aptId){
+        apptRepo.deleteById(aptId);
+    }
     public void bookAppointment(long patientId, long doctorId, long timeSlotId) throws Exception {
         Patient patient = patientRep.findById(patientId).get();
         Doctor doctor = docRep.findById(doctorId).get();

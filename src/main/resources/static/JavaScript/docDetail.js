@@ -4,13 +4,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const slotContainer = document.getElementById("slot-container");
     const timeSlotInput = document.getElementById("timeSlotId");
+    const bookbtn = document.getElementById("bookButton");
+    const errorMsg = document.getElementById("error-message");
 
     slotContainer.addEventListener("click",(event)=>{
         if(event.target.classList.contains("slot-button")){
             document.querySelectorAll(".slot-button").forEach(slot=>slot.classList.remove("active"));
             event.target.classList.add("active");
             timeSlotInput.value=event.target.dataset.slotId;
+            errorMsg.style.display="none";
         }
+    });
+    bookbtn.addEventListener("click",(event)=>{
+        if(!timeSlotInput.value){
+            event.preventDefault();
+            errorMsg.style.display = "block";
+            return;
+        }
+        showNotification();
     });
 });
 
@@ -59,23 +70,30 @@ function populateDays(timeSlots) {
 
 function populateSlots(slots) {
     const slotsContainer = document.getElementById("slot-container");
-    slotsContainer.innerHTML = "";
+    slotsContainer.innerHTML = ""; // Clear previous slots
 
     slots.forEach((slot) => {
-        if (!slot.isBooked) {
-            const slotButton = document.createElement("button");
-            slotButton.textContent = `${slot.startTime} - ${slot.endTime}`;
-            slotButton.className = "slot-button";
-            slotButton.dataset.slotId = slot.slotId;
+        const slotButton = document.createElement("button");
+        slotButton.textContent = `${slot.startTime} - ${slot.endTime}`;
+        slotButton.className = "slot-button";
+        slotButton.dataset.slotId = slot.slotId;
+
+
+        if (slot.is_booked===1||slot.is_booked==="1"||slot.is_booked===true) {
+            slotButton.classList.add("booked");
+            slotButton.disabled = true;
+        } else {
+
             slotButton.addEventListener("click", () => {
                 document.querySelectorAll(".slot-button").forEach((s) => s.classList.remove("active"));
                 slotButton.classList.add("active");
                 selectSlot(slot);
             });
-            slotsContainer.appendChild(slotButton);
         }
+        slotsContainer.appendChild(slotButton);
     });
 }
+
 
 function selectSlot(slot) {
     if(!slot.slot_id){
@@ -112,4 +130,11 @@ function getDoctorId(){
         return null;
     }
     return doctorId;
+}
+function showNotification(){
+    const notification = document.getElementById("notification");
+    notification.classList.remove("hidden");
+    setTimeout(()=>{
+        notification.classList.add("hidden");
+    },3000);
 }

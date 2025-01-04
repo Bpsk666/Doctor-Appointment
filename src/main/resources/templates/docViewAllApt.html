@@ -15,7 +15,7 @@
     <li>
       <a th:href="@{/docsys/viewConfirmApt/{docId}(docId=${doc.docId})}">
         <i class="fa-solid fa-clipboard"></i>
-        <span>Dashboard</span>
+        <span>Confirmed Appointments</span>
       </a>
     </li>
     <li>
@@ -24,7 +24,7 @@
         <span>Time Slots</span>
       </a>
     </li>
-    <li class="active">
+    <li>
       <a th:href="@{/docsys/viewTimeSlots/{docId}(docId=${doc.docId})}">
         <i class="fa-regular fa-clock"></i>
         <span>View Time</span>
@@ -36,7 +36,7 @@
         <span>Appointments</span>
       </a>
     </li>
-    <li>
+    <li class="active">
       <a th:href="@{/docsys/docViewAllApt/{docId}(docId=${doc.docId})}">
         <i class="fa-solid fa-list"></i>
         <span>History</span>
@@ -73,16 +73,31 @@
     </div>
   </div>
   <div class="tabular-wrapper">
-    <div class="content-section">
-      <!-- Add your main page content here -->
-      <h2>Available Time Slots</h2>
-      <div class="timeCard" th:if="${not #lists.isEmpty(timeSlots)}">
-        <div class="tmCard" th:each="slot:${timeSlots}">
-          <h3>Date: <span th:text="${slot.date}"></span></h3>
-          <p><strong>Time:</strong><span th:text="${slot.startTime}"></span> - <span th:text="${slot.endTime}"></span></p>
-          <p><strong>Doctor: </strong> <span th:text="${slot.doctor.docFName}"></span></p>
-        </div>
-      </div>
+    <h2>Appointments</h2>
+    <div class="table-container" th:if="${not #lists.isEmpty(docApt)}">
+      <table class="table">
+        <thead class="thead">
+        <tr class="trow">
+          <th class="th">Appointment ID</th>
+          <th class="th">Patient Name</th>
+          <td class="th">Date</td>
+          <th class="th">Appointment Time</th>
+          <th class="th">Status</th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        <tr th:each="apt: ${docApt}" class="trow">
+          <td th:text="${apt.apptId}" class="td"></td>
+          <td th:text="${apt.patient.patientFName}+' '+${apt.patient.patientLName}" class="td"></td>
+          <td th:text="${apt.timeSlot.date}" class="td"></td>
+          <td class="td"><span th:text="${apt.timeSlot.startTime}"></span> - <span th:text="${apt.timeSlot.endTime}"></span></td>
+          <td th:text="${apt.status}" class="td"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div th:if="${#lists.isEmpty(docApt)}" class="no-item-message">
+      No appointment to show.
     </div>
   </div>
 </div>

@@ -23,7 +23,7 @@ public class AppointmentController {
         Long patient = (Long) session.getAttribute("patientId");
         try{
             aptSer.bookAppointment(patientId,doctorId,timeSlotId);
-            return "redirect:/patientSys/patientHomePage";
+            return "redirect:/patientSys/viewDoctors";
         }
         catch (Exception e){
             return "error: "+e.getMessage();

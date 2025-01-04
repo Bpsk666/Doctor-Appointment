@@ -1,77 +1,152 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Raleway", sans-serif;
 }
-.doc-detail{
+
+.doc-detail {
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #031716;
+    overflow: hidden;
 }
-.doc-card{
-    width: 830px;
+
+.doc-card {
+    width: 850px;
+    display: flex;
+    gap: 20px;
+    background-color: #032f30;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    padding-bottom: 60px;
+}
+
+.doc-img {
+    flex: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-.doc-img{
-    width: 53%;
-    height: 100%;
-}
-.detail-info{
+
+.doc-img img {
     width: 100%;
-    height: 400px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.detail-info {
+    flex: 1;
     background-color: #032f30;
-}
-.detail-info h2{
-    color: #fff;
-    text-align: center;
-    padding: 8px;
-    font-size: 18px;
-}
-.info{
-    color: #fff;
-    padding: 11px;
-    font-size: 14px;
-}
-.time {
-    background-color: #032f30;
-    display: block;
-    width: 100%;
-    height: 400px;
-    justify-content: center;
-    text-align: center;
-}
-.time-slot h2{
-    color:#fff;
-    text-align: center;
-    padding: 8px;
-    font-size: 18px;
-}
-.time-card{
-    border: 1px solid #ddd;
-    width: 200px;
     padding: 10px;
     border-radius: 8px;
-    margin: 10px;
 }
-.time-card h3, p{
+
+.detail-info h2 {
     color: #fff;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.info {
+    color: #fff;
+    padding: 8px;
     font-size: 14px;
 }
-.doc-card .close i{
+
+.time {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.time-slot {
+    width: 100%;
+    max-height: 400px;
+    background-color: #032f30;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.time-slot h2 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.time-slot-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+    padding-right: 10px;
+}
+
+.time-slot-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.time-slot-scroll::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 8px;
+}
+
+.time-card {
+    background: #044544;
+    border: 1px solid #ddd;
+    width: 95%;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.doc-card .close i {
     height: 15px;
     position: absolute;
-    right: 23.5%;
-    top: 180px;
+    right: 20px;
+    top: 20px;
     color: white;
-    transform: translateY(-50%);
+    cursor: pointer;
 }
-.close i:hover{
+
+.close i:hover {
     color: red;
+}
+.delete-button-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.delete-btn {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c9302c;
 }

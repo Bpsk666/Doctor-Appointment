@@ -12,8 +12,8 @@
 <div class="sidebar">
   <div class="logo"></div>
   <ul class="menu">
-    <li>
-      <a th:href="@{/adminsys/itemView}">
+    <li class="active">
+      <a th:href="@{/adminsys/viewAllApt}">
         <i class="fa-solid fa-clipboard"></i>
         <span>Dashboard</span>
       </a>
@@ -31,7 +31,7 @@
       </a>
     </li>
     <li>
-      <a th:href="@{/adminsys/newCategory}">
+      <a th:href="@{/adminsys/viewAllConfirm}">
         <i class="fa-regular fa-calendar-days"></i>
         <span>Appointments</span>
       </a>
@@ -49,7 +49,7 @@
       </a>
     </li>
     <li class="logout">
-      <a th:href="@{/adminsys/adminLogout}">
+      <a th:href="@{/adminsys/adminindex}">
         <i class="fa-solid fa-right-from-bracket"></i>
         <span>Log out</span>
       </a>
@@ -59,14 +59,14 @@
 <div class="main-content">
   <div class="header-wrapper">
     <div class="header-title">
-      <div class="nav__logo">Health<span>Care</span></div>
+      <div class="nav__logo">City<span>Star</span></div>
       <span class="header-span">Admin Dashboard</span>
     </div>
     <div class="user-info">
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Search" class="search-input">
-      </div>
+<!--      <div class="search-box">-->
+<!--        <i class="fa-solid fa-magnifying-glass"></i>-->
+<!--        <input type="text" placeholder="Search" class="search-input">-->
+<!--      </div>-->
       <div class="profile-pic" th:text="${#strings.substring(admin.adminFName, 0, 1).toUpperCase()}"></div>
     </div>
   </div>
@@ -79,6 +79,7 @@
           <th class="th">Appointment ID</th>
           <th class="th">Doctor Name</th>
           <th class="th">Patient Name</th>
+          <th class="th">Date</th>
           <th class="th">Appointment Time</th>
           <th class="th">Status</th>
         </tr>
@@ -88,6 +89,7 @@
           <td th:text="${apt.apptId}" class="td"></td>
           <td th:text="'Dr. '+${apt.doctor.docFName}+' '+${apt.doctor.docLName}" class="td"></td>
           <td th:text="${apt.patient.patientFName}+' '+${apt.patient.patientLName}" class="td"></td>
+          <td th:text="${apt.timeSlot.date}" class="td"></td>
           <td class="td"><span th:text="${apt.timeSlot.startTime}"></span> - <span th:text="${apt.timeSlot.endTime}"></span></td>
           <td th:text="${apt.status}" class="td"></td>
         </tr>

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminService {
-
     @Autowired
     private AdminRepository adminRep;
 
@@ -25,7 +24,7 @@ public class AdminService {
             admin = adminRep.findByAdminEmailAndAdminPassword(adminEmail, adminPassword);
             if(admin==null)
             {
-                return "adminLogin";
+                return "Login";
             }
         }
         return "redirect:/adminsys/adminHomePage";
